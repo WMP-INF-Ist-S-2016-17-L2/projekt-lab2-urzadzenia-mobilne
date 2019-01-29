@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PizzaApp</string>
+    <string name="pickup">Odbior Własny</string>
+    <string name="delivery">Dostawa</string>
+    <string name="title_activity_user_space">UserSpace</string>
+    <string name="menu">Menu</string>
+    <string name="my_orders">Moje zamowienia</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_pizza_info">PizzaInfo</string>
+    <string name="title_activity_create_own">CreateOwnActivity</string>
+    <string name="baseType">Ciasto</string>
+    <string name="topping">Dodatek</string>
 </resources>
