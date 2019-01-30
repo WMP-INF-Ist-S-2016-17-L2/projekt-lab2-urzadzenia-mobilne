@@ -13,5 +13,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        PizzaInfoViewModel viewModel = ViewModelProviders
+//                .of(this, new PizzaViewModelFactory(getApplication(), 1))
+//                .get(PizzaInfoViewModel.class);
+//
+//        viewModel.getPizza().observe(this, pizza -> {
+//            int x =23;
+//            int y = x;
+//        });
     }
 }
