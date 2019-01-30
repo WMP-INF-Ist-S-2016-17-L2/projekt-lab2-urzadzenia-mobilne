@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MenuActivity"
-    tools:showIn="@layout/activity_menu">
+    tools:context=".pizza.list.PizzaListActivity"
+    tools:showIn="@layout/activity_pizza_list">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/menu_recyclerView"
+        android:id="@+id/pizzaList_recyclerView"
         android:layout_width="match_parent"
-        tools:listitem="@layout/menu_pizza_list_item"
+        tools:listitem="@layout/pizza_list_item"
         android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

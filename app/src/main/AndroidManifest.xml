@@ -12,6 +12,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".restaurant.RestaurantListActivity"
+            android:label="@string/title_activity_restaurant_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".CreateOwnActivity"
             android:label="@string/title_activity_create_own"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -20,7 +24,7 @@
             android:label="@string/title_activity_pizza_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".pizza.list.PizzaListActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -32,6 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

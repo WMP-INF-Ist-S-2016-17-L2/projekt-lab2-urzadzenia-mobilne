@@ -9,6 +9,8 @@ import com.marek.wojdyla.pizzaapp.db.pizza.PizzaDao;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithToppingEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.ToppingEntity;
+import com.marek.wojdyla.pizzaapp.db.restaurant.RestaurantDao;
+import com.marek.wojdyla.pizzaapp.db.restaurant.RestaurantEntity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -21,7 +23,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
                 PizzaEntity.class,
                 BaseEntity.class,
                 ToppingEntity.class,
-                PizzaWithToppingEntity.class
+                PizzaWithToppingEntity.class,
+                RestaurantEntity.class
         },
         version = 1,
         exportSchema = false
@@ -31,6 +34,8 @@ public abstract class PizzaDatabase extends RoomDatabase {
     private static volatile PizzaDatabase INSTANCE;
 
     public abstract PizzaDao getPizzaBaseDao();
+
+    public abstract RestaurantDao getRestaurantDao();
 
     public static PizzaDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -71,6 +76,12 @@ public abstract class PizzaDatabase extends RoomDatabase {
             insertPizzaIngredient(db, peperoni, pepper);
             insertPizzaIngredient(db, peperoni, mushroom);
 
+            insertRestaurant(db, "Rest (D)", "Warszawa", true);
+            insertRestaurant(db, "Rest (D)", "Gdansk", true);
+            insertRestaurant(db, "Rest (P)", "Rzeszow", false);
+            insertRestaurant(db, "Rest (P)", "Warszawa", false);
+            insertRestaurant(db, "Rest (P)", "Krakow", false);
+
             db.setTransactionSuccessful();
             db.endTransaction();
         }
@@ -96,11 +107,19 @@ public abstract class PizzaDatabase extends RoomDatabase {
             return db.insert("topping", SQLiteDatabase.CONFLICT_REPLACE, values);
         }
 
-        private static long insertPizzaIngredient(SupportSQLiteDatabase db, long pizzaId, long toppingId) {
+        private static void insertPizzaIngredient(SupportSQLiteDatabase db, long pizzaId, long toppingId) {
             ContentValues values = new ContentValues();
             values.put("pizza_with_topping__pizza_id", pizzaId);
             values.put("pizza_with_topping__topping_id", toppingId);
-            return db.insert("pizza_with_topping", SQLiteDatabase.CONFLICT_REPLACE, values);
+            db.insert("pizza_with_topping", SQLiteDatabase.CONFLICT_REPLACE, values);
+        }
+
+        private static void insertRestaurant(SupportSQLiteDatabase db, String name, String city, boolean isDelivery) {
+            ContentValues values = new ContentValues();
+            values.put("restaurant__name", name);
+            values.put("restaurant__city", city);
+            values.put("restaurant__has_delivery", isDelivery);
+            db.insert("restaurant", SQLiteDatabase.CONFLICT_REPLACE, values);
         }
     }
 }

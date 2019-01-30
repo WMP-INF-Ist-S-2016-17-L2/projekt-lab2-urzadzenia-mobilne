@@ -3,8 +3,8 @@ package com.marek.wojdyla.pizzaapp.vm.pizza.info;
 import android.app.Application;
 
 import com.marek.wojdyla.pizzaapp.db.PizzaDatabase;
-import com.marek.wojdyla.pizzaapp.db.pizza.Pizza;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaDao;
+import com.marek.wojdyla.pizzaapp.db.pizza.PizzaInfo;
 import com.marek.wojdyla.pizzaapp.db.pizza.ToppingEntity;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import androidx.lifecycle.LiveData;
 
 public class PizzaInfoViewModel extends AndroidViewModel {
 
-    private final LiveData<Pizza> mPizza;
+    private final LiveData<PizzaInfo> mPizza;
     private final LiveData<List<ToppingEntity>> mToppings;
 
     public PizzaInfoViewModel(@NonNull Application application, long pizzaId) {
@@ -25,7 +25,7 @@ public class PizzaInfoViewModel extends AndroidViewModel {
         mToppings = pizzaDao.getPizzaToppings(pizzaId);
     }
 
-    public LiveData<Pizza> getPizza() {
+    public LiveData<PizzaInfo> getPizza() {
         return mPizza;
     }
 

@@ -2,7 +2,7 @@ package com.marek.wojdyla.pizzaapp.db.pizza;
 
 import androidx.room.Embedded;
 
-public class Pizza {
+public class PizzaInfo {
     @Embedded
     public PizzaEntity pizza;
     @Embedded

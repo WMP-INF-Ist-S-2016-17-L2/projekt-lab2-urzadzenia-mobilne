@@ -1,6 +1,6 @@
 package com.marek.wojdyla.pizzaapp.db.order;
 
-import com.marek.wojdyla.pizzaapp.db.restaurant.Restaurant;
+import com.marek.wojdyla.pizzaapp.db.restaurant.RestaurantEntity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,7 +10,7 @@ import androidx.room.Index;
 @Entity(
         tableName = "order",
         foreignKeys = @ForeignKey(
-                entity = Restaurant.class,
+                entity = RestaurantEntity.class,
                 parentColumns = "restaurant__id",
                 childColumns = "order__restaurant_id"
         ),

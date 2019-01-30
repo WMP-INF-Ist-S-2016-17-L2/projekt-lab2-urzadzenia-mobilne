@@ -10,4 +10,6 @@
     <string name="title_activity_create_own">CreateOwnActivity</string>
     <string name="baseType">Ciasto</string>
     <string name="topping">Dodatek</string>
+    <string name="title_activity_restaurant_list">RestaurantList</string>
+    <string name="title_activity_pizza_list">PizzaListActivity</string>
 </resources>
