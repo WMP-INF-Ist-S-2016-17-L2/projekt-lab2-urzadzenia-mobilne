@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="48dp"
+    tools:parentTag="FrameLayout"
+    android:layout_height="48dp"
+    tools:background="?attr/colorPrimary">
+
+    <ImageButton
+        android:id="@+id/basketWithCounter_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="right"
+        app:srcCompat="@drawable/ic_baseline_shopping_cart_24px"
+        tools:showIn="@layout/activity_pizza_list" />
+
+    <TextView
+        android:id="@+id/basketWithCounter_counter"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="4dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceCaption"
+        android:textSize="10dp"
+        tools:text="1" />
+</merge>

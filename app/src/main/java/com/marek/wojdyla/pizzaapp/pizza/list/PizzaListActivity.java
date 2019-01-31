@@ -25,6 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PizzaListActivity extends AppCompatActivity {
 
+    private List<PizzaWithPrice> mPizzasInBasket = new ArrayList<>();
+
+    BasketWithCounter mBasket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +49,17 @@ public class PizzaListActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> showCreateOwn());
+
+        mBasket = findViewById(R.id.pizzaList_basket);
     }
 
     private void showCreateOwn() {
         startActivity(new Intent(PizzaListActivity.this, CreateOwnActivity.class));
+    }
+
+    void onAddToBasket(PizzaWithPrice entity) {
+        mPizzasInBasket.add(entity);
+        mBasket.setCounter(mPizzasInBasket.size());
     }
 
     public static class IntentFactory {
@@ -71,7 +82,7 @@ public class PizzaListActivity extends AppCompatActivity {
         }
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder {
 
         private PizzaWithPrice mEntity;
         private final TextView name;
@@ -87,6 +98,7 @@ public class PizzaListActivity extends AppCompatActivity {
 
         private void onClick(View v) {
             if (mEntity == null) return;
+            onAddToBasket(mEntity);
 //            v.getContext().startActivity(PizzaListActivity.IntentFactory.create(
 //                    v.getContext(),
 //                    mEntity.id,
@@ -101,7 +113,7 @@ public class PizzaListActivity extends AppCompatActivity {
         }
     }
 
-    private static class Adapter extends RecyclerView.Adapter<ViewHolder> {
+    private class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
         private List<PizzaWithPrice> mData = new ArrayList<>();
 
