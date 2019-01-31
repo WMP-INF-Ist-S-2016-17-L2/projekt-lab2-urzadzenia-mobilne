@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CreateOwnActivity"
+    tools:context=".pizza.creator.CreateOwnActivity"
     tools:showIn="@layout/activity_create_own">
 
     <ImageView
         android:id="@+id/createOwn_preview"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,9 +19,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pizza_icon_big" />
+        app:srcCompat="@drawable/pizza_icon" />
 
-    <TextView
+    <EditText
         android:id="@+id/createOwn_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createOwn_preview"
-        tools:text="Pizza Name" />
+        android:hint="@string/pizza_name_hint" />
 
     <TextView
         android:id="@+id/createOwn_price"
@@ -49,11 +49,10 @@
         app:layout_constraintTop_toBottomOf="@+id/createOwn_name"
         tools:text="44 PLN" />
 
-
     <TextView
         android:id="@+id/createOwn_baseTypeLabel"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:layout_marginStart="8dp"
         android:text="@string/baseType"
         android:textAlignment="viewStart"
@@ -66,49 +65,56 @@
         android:id="@+id/createOwn_baseType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/createOwn_baseTypeLabel"
+        app:layout_constraintEnd_toStartOf="@+id/createOwn_addTopping"
+        app:layout_constraintStart_toStartOf="@+id/createOwn_topping"
         app:layout_constraintTop_toBottomOf="@+id/createOwn_price" />
 
     <TextView
         android:id="@+id/createOwn_toppingLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/baseType"
+        android:layout_marginStart="8dp"
+        android:text="@string/topping"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintBottom_toBottomOf="@+id/createOwn_topping"
-        app:layout_constraintTop_toTopOf="@+id/createOwn_topping"
-        tools:layout_editor_absoluteX="8dp"
-        tools:text="Dodatek" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/createOwn_topping" />
 
     <Spinner
         android:id="@+id/createOwn_topping"
         android:layout_width="0dp"
         android:layout_height="26dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/createOwn_addTopping"
+        app:layout_constraintEnd_toStartOf="@+id/createOwn_addTopping"
+        app:layout_constraintStart_toEndOf="@+id/createOwn_toppingLabel"
+        app:layout_constraintTop_toTopOf="@+id/createOwn_addTopping" />
+
+    <Button
+        android:id="@+id/createOwn_addTopping"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/dodaj"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/createOwn_toppingLabel"
         app:layout_constraintTop_toBottomOf="@+id/createOwn_baseType" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/createOwn_pizzaContents"
+        android:id="@+id/createOwn_pizzaToppingList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createOwn_topping"
-        tools:listitem="@layout/pizza_content_item" />
+        app:layout_constraintTop_toBottomOf="@+id/createOwn_addTopping"
+        tools:listitem="@layout/pizza_topping_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

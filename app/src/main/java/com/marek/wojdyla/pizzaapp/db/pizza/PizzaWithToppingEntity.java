@@ -3,6 +3,7 @@ package com.marek.wojdyla.pizzaapp.db.pizza;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -33,4 +34,13 @@ public class PizzaWithToppingEntity {
     public long pizzaId;
     @ColumnInfo(name = "pizza_with_topping__topping_id")
     public long toppingId;
+
+    public PizzaWithToppingEntity() {
+    }
+
+    @Ignore
+    public PizzaWithToppingEntity(long pizzaId, long toppingId) {
+        this.pizzaId = pizzaId;
+        this.toppingId = toppingId;
+    }
 }

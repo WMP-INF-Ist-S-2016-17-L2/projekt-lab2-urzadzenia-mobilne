@@ -3,6 +3,7 @@ package com.marek.wojdyla.pizzaapp.db.pizza;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -25,4 +26,14 @@ public class PizzaEntity {
     public boolean isCustom;
     @ColumnInfo(name = "pizza__base_id")
     public long baseId;
+
+    public PizzaEntity() {
+    }
+
+    @Ignore
+    public PizzaEntity(String name, long baseId) {
+        this.name = name;
+        this.baseId = baseId;
+        this.isCustom = true;
+    }
 }

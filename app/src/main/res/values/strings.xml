@@ -12,4 +12,6 @@
     <string name="topping">Dodatek</string>
     <string name="title_activity_restaurant_list">RestaurantList</string>
     <string name="title_activity_pizza_list">PizzaListActivity</string>
+    <string name="pizza_name_hint">Nazwa Pizzy</string>
+    <string name="dodaj">Dodaj</string>
 </resources>

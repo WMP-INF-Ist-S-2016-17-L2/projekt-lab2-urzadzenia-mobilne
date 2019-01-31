@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marek.wojdyla.pizzaapp.R;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithPrice;
+import com.marek.wojdyla.pizzaapp.pizza.creator.CreateOwnActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +44,11 @@ public class PizzaListActivity extends AppCompatActivity {
         viewModel.getPizzaList().observe(this, adapter::setData);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> showCreateOwn());
+    }
 
-            }
-        });
+    private void showCreateOwn() {
+        startActivity(new Intent(PizzaListActivity.this, CreateOwnActivity.class));
     }
 
     public static class IntentFactory {

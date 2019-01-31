@@ -9,15 +9,14 @@
     android:paddingRight="8dp">
 
     <TextView
-        android:id="@+id/pizzaContentItem_name"
+        android:id="@+id/pizzaToppingItem_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:padding="8dp"
         tools:text="Topping name" />
 
     <TextView
-        android:id="@+id/pizzaContentItem_price"
+        android:id="@+id/pizzaToppingItem_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="4 PLN" />
