@@ -26,6 +26,16 @@
         android:padding="8dp"
         tools:text="Pizza name" />
 
+    <ImageButton
+        android:id="@+id/pizzaListItem_info"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="?attr/listPreferredItemHeight"
+        android:layout_height="?attr/listPreferredItemHeight"
+        android:padding="8dp"
+        android:clickable="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_baseline_info_24px" />
+
     <TextView
         android:id="@+id/pizzaListItem_price"
         android:layout_width="wrap_content"

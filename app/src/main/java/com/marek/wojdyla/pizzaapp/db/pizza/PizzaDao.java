@@ -6,12 +6,11 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.RoomWarnings;
 
 @Dao
 public interface PizzaDao {
 
-    String SELECT_PIZZA_WITH_PRICE = "SELECT " +
+    @Query("SELECT " +
             "pizza.*," +
             "(" +
             "SELECT SUM(topping.topping__price) " +
@@ -20,19 +19,24 @@ public interface PizzaDao {
             "ON topping.topping__id = pizza_with_topping.pizza_with_topping__topping_id " +
             "WHERE pizza_with_topping.pizza_with_topping__pizza_id = pizza.pizza__id" +
             ") AS price " +
-            "FROM pizza";
-
-    @Query(SELECT_PIZZA_WITH_PRICE)
+            "FROM pizza")
     /**
      * Bierze wszystkie pizza toppings i dodaje wszystkie skladniki razem aby dostac total
      */
     LiveData<List<PizzaWithPrice>> getPizzaList();
 
-    @Query(SELECT_PIZZA_WITH_PRICE + " " +
-            "INNER JOIN base ON base.base__id = pizza.pizza__base_id " +
-            "WHERE pizza.pizza__id = :id"
-    )
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT " +
+            "pizza.*, base.*, " +
+            "(" +
+            "SELECT SUM(topping.topping__price) " +
+            "FROM pizza_with_topping " +
+            "LEFT JOIN topping " +
+            "ON topping.topping__id = pizza_with_topping.pizza_with_topping__topping_id " +
+            "WHERE pizza_with_topping.pizza_with_topping__pizza_id = pizza.pizza__id" +
+            ") AS price " +
+            "FROM pizza " +
+            "LEFT JOIN base ON base.base__id = pizza__base_id " +
+            "WHERE pizza__id = :id ")
     LiveData<PizzaInfo> getPizza(long id);
 
     @Query("SELECT " +

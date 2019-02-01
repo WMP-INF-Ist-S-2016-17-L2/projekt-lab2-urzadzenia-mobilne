@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.marek.wojdyla.pizzaapp.R;
 import com.marek.wojdyla.pizzaapp.db.order.Order;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithPrice;
+import com.marek.wojdyla.pizzaapp.pizza.info.PizzaInfoActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -94,11 +96,21 @@ public class OrderInfoActivity extends AppCompatActivity {
         private PizzaWithPrice mEntity;
         private final TextView name;
         private final TextView price;
+        private final ImageButton info;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.pizzaListItem_name);
             price = itemView.findViewById(R.id.pizzaListItem_price);
+            info = itemView.findViewById(R.id.pizzaListItem_info);
+            info.setOnClickListener(this::onClick);
+        }
+
+        private void onClick(View view) {
+            if (mEntity == null) return;
+            startActivity(PizzaInfoActivity
+                    .IntentFactory
+                    .create(OrderInfoActivity.this, mEntity.pizza.id));
         }
 
         public void bind(PizzaWithPrice entity) {

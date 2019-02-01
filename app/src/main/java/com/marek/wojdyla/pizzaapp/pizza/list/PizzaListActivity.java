@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +21,7 @@ import com.marek.wojdyla.pizzaapp.db.order.OrderItemEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithPrice;
 import com.marek.wojdyla.pizzaapp.order.info.OrderInfoActivity;
 import com.marek.wojdyla.pizzaapp.pizza.creator.CreateOwnActivity;
+import com.marek.wojdyla.pizzaapp.pizza.info.PizzaInfoActivity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -136,13 +138,23 @@ public class PizzaListActivity extends AppCompatActivity {
         private PizzaWithPrice mEntity;
         private final TextView name;
         private final TextView price;
+        private final ImageButton info;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.pizzaListItem_name);
             price = itemView.findViewById(R.id.pizzaListItem_price);
+            info = itemView.findViewById(R.id.pizzaListItem_info);
 
             itemView.setOnClickListener(this::onClick);
+            info.setOnClickListener(this::infoClicked);
+        }
+
+        private void infoClicked(View view) {
+            if (mEntity == null) return;
+            startActivity(PizzaInfoActivity
+                    .IntentFactory
+                    .create(PizzaListActivity.this, mEntity.pizza.id));
         }
 
         private void onClick(View v) {
