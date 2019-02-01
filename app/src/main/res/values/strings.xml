@@ -16,4 +16,5 @@
     <string name="dodaj">Dodaj</string>
     <string name="paid">Zaplacono</string>
     <string name="pay_now">Zaplac teraz</string>
+    <string name="pizza_no_longer_available">Pizza nie juz dostepna</string>
 </resources>

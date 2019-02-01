@@ -19,7 +19,8 @@ public interface PizzaDao {
             "ON topping.topping__id = pizza_with_topping.pizza_with_topping__topping_id " +
             "WHERE pizza_with_topping.pizza_with_topping__pizza_id = pizza.pizza__id" +
             ") AS price " +
-            "FROM pizza")
+            "FROM pizza " +
+            "WHERE pizza.pizza__is_deleted = 0")
     /**
      * Bierze wszystkie pizza toppings i dodaje wszystkie skladniki razem aby dostac total
      */
@@ -58,4 +59,7 @@ public interface PizzaDao {
 
     @Insert
     void insertPizzaToppings(List<PizzaWithToppingEntity> entities);
+
+    @Query("UPDATE pizza SET pizza__is_deleted = 1 WHERE pizza__id=:id")
+    void deletePizza(long id);
 }

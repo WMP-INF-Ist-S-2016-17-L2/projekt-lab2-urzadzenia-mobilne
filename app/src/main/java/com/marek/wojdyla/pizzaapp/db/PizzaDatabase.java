@@ -104,6 +104,7 @@ public abstract class PizzaDatabase extends RoomDatabase {
             values.put("pizza__name", name);
             values.put("pizza__is_custom", false);
             values.put("pizza__base_id", baseId);
+            values.put("pizza__is_deleted", 0);
             return db.insert("pizza", SQLiteDatabase.CONFLICT_REPLACE, values);
         }
 

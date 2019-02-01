@@ -26,6 +26,8 @@ public class PizzaEntity {
     public boolean isCustom;
     @ColumnInfo(name = "pizza__base_id")
     public long baseId;
+    @ColumnInfo(name = "pizza__is_deleted")
+    public boolean isDeleted;
 
     public PizzaEntity() {
     }

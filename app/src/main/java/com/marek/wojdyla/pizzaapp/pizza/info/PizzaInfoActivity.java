@@ -29,6 +29,7 @@ public class PizzaInfoActivity extends AppCompatActivity {
     private TextView mName;
     private TextView mPrice;
     private TextView mBase;
+    private TextView mPizzaDeleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class PizzaInfoActivity extends AppCompatActivity {
         mName = findViewById(R.id.pizzaContent_name);
         mPrice = findViewById(R.id.pizzaContent_price);
         mBase = findViewById(R.id.pizzaContent_base);
+        mPizzaDeleted = findViewById(R.id.pizzaContent_isDeleted);
 
         PizzaDao pizzaDao = PizzaDatabase.getDatabase(this).getPizzaDao();
         pizzaDao.getPizza(pizzaId).observe(this, this::bindPizza);
@@ -57,6 +59,7 @@ public class PizzaInfoActivity extends AppCompatActivity {
         mName.setText(pizzaInfo.pizza.name);
         mPrice.setText(mFormat.format(pizzaInfo.price));
         mBase.setText(pizzaInfo.pizzaBase.name);
+        mPizzaDeleted.setVisibility(pizzaInfo.pizza.isDeleted ? View.VISIBLE : View.GONE);
     }
 
     public static class IntentFactory {

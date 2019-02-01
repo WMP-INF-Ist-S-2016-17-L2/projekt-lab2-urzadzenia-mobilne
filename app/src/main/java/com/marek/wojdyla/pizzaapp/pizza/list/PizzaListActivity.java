@@ -40,6 +40,7 @@ public class PizzaListActivity extends AppCompatActivity {
     private List<PizzaWithPrice> mPizzasInBasket = new ArrayList<>();
 
     BasketWithCounter mBasket;
+    private PizzaListViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class PizzaListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        PizzaListViewModel viewModel = ViewModelProviders
+        mViewModel = ViewModelProviders
                 .of(this)
                 .get(PizzaListViewModel.class);
 
@@ -57,7 +58,7 @@ public class PizzaListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        viewModel.getPizzaList().observe(this, adapter::setData);
+        mViewModel.getPizzaList().observe(this, adapter::setData);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> showCreateOwn());
@@ -139,15 +140,24 @@ public class PizzaListActivity extends AppCompatActivity {
         private final TextView name;
         private final TextView price;
         private final ImageButton info;
+        private final ImageButton delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.pizzaListItem_name);
             price = itemView.findViewById(R.id.pizzaListItem_price);
             info = itemView.findViewById(R.id.pizzaListItem_info);
+            delete = itemView.findViewById(R.id.pizzaListItem_delete);
+            delete.setVisibility(View.VISIBLE);
 
             itemView.setOnClickListener(this::onClick);
             info.setOnClickListener(this::infoClicked);
+            delete.setOnClickListener(this::deleteClicked);
+        }
+
+        private void deleteClicked(View view) {
+            if (mEntity == null || !mEntity.pizza.isCustom) return;
+            mViewModel.deletePizza(mEntity.pizza.id);
         }
 
         private void infoClicked(View view) {
@@ -166,6 +176,7 @@ public class PizzaListActivity extends AppCompatActivity {
             name.setText(entity.pizza.name);
             price.setText(mFormat.format(entity.price));
             mEntity = entity;
+            delete.setVisibility(entity.pizza.isCustom ? View.VISIBLE : View.GONE);
         }
     }
 
