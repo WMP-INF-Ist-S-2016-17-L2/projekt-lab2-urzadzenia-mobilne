@@ -1,4 +1,4 @@
-package com.marek.wojdyla.pizzaapp.vm.pizza.info;
+package com.marek.wojdyla.pizzaapp.pizza.info;
 
 import android.app.Application;
 
@@ -20,7 +20,7 @@ public class PizzaInfoViewModel extends AndroidViewModel {
 
     public PizzaInfoViewModel(@NonNull Application application, long pizzaId) {
         super(application);
-        PizzaDao pizzaDao = PizzaDatabase.getDatabase(application).getPizzaBaseDao();
+        PizzaDao pizzaDao = PizzaDatabase.getDatabase(application).getPizzaDao();
         mPizza = pizzaDao.getPizza(pizzaId);
         mToppings = pizzaDao.getPizzaToppings(pizzaId);
     }

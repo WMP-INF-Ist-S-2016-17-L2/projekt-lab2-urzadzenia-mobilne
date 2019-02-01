@@ -1,15 +1,16 @@
-package com.marek.wojdyla.pizzaapp;
+package com.marek.wojdyla.pizzaapp.pizza.info;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.marek.wojdyla.pizzaapp.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class PizzaInfo extends AppCompatActivity {
+public class PizzaInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

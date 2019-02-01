@@ -1,7 +1,9 @@
 package com.marek.wojdyla.pizzaapp.pizza.list;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,15 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marek.wojdyla.pizzaapp.R;
+import com.marek.wojdyla.pizzaapp.db.PizzaDatabase;
+import com.marek.wojdyla.pizzaapp.db.order.OrderDao;
+import com.marek.wojdyla.pizzaapp.db.order.OrderEntity;
+import com.marek.wojdyla.pizzaapp.db.order.OrderItemEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithPrice;
+import com.marek.wojdyla.pizzaapp.order.OrderInfoActivity;
 import com.marek.wojdyla.pizzaapp.pizza.creator.CreateOwnActivity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +59,39 @@ public class PizzaListActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> showCreateOwn());
 
         mBasket = findViewById(R.id.pizzaList_basket);
+        mBasket.setOnClickListener(this::createOrder);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void createOrder(View view) {
+        final long restaurantId = IntentFactory.restaurantId(getIntent());
+        final boolean isDelivery = IntentFactory.isDelivery(getIntent());
+        final List<PizzaWithPrice> pizzas = new ArrayList<>(mPizzasInBasket);
+        new AsyncTask<Void, Void, Long>() {
+
+            @Override
+            protected Long doInBackground(Void... voids) {
+                OrderDao orderDao = PizzaDatabase.getDatabase(getApplication()).getOrderDao();
+
+                double total = mPizzasInBasket.stream().mapToDouble(value -> value.price).sum();
+
+                long orderId = orderDao.createOrder(new OrderEntity(restaurantId, isDelivery, total));
+                for (PizzaWithPrice pizza : pizzas) {
+                    orderDao.insert(new OrderItemEntity(orderId, pizza.pizza.id));
+                }
+                return orderId;
+            }
+
+            @Override
+            protected void onPostExecute(Long orderId) {
+                super.onPostExecute(orderId);
+                startActivity(
+                        OrderInfoActivity
+                                .IntentFactory
+                                .create(PizzaListActivity.this, orderId)
+                );
+            }
+        }.execute();
     }
 
     private void showCreateOwn() {
@@ -83,7 +124,7 @@ public class PizzaListActivity extends AppCompatActivity {
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-
+        private final DecimalFormat mFormat = new DecimalFormat("0.00");
         private PizzaWithPrice mEntity;
         private final TextView name;
         private final TextView price;
@@ -99,16 +140,11 @@ public class PizzaListActivity extends AppCompatActivity {
         private void onClick(View v) {
             if (mEntity == null) return;
             onAddToBasket(mEntity);
-//            v.getContext().startActivity(PizzaListActivity.IntentFactory.create(
-//                    v.getContext(),
-//                    mEntity.id,
-//                    mEntity.hasDelivery
-//            ));
         }
 
         public void bind(PizzaWithPrice entity) {
             name.setText(entity.pizza.name);
-            price.setText(String.valueOf(entity.price));
+            price.setText(mFormat.format(entity.price));
             mEntity = entity;
         }
     }

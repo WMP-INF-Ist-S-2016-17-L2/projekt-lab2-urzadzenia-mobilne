@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.marek.wojdyla.pizzaapp.db.order.OrderDao;
+import com.marek.wojdyla.pizzaapp.db.order.OrderEntity;
+import com.marek.wojdyla.pizzaapp.db.order.OrderItemEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.BaseEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaDao;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaEntity;
@@ -24,7 +27,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
                 BaseEntity.class,
                 ToppingEntity.class,
                 PizzaWithToppingEntity.class,
-                RestaurantEntity.class
+                RestaurantEntity.class,
+                OrderEntity.class,
+                OrderItemEntity.class
         },
         version = 1,
         exportSchema = false
@@ -33,7 +38,9 @@ public abstract class PizzaDatabase extends RoomDatabase {
 
     private static volatile PizzaDatabase INSTANCE;
 
-    public abstract PizzaDao getPizzaBaseDao();
+    public abstract OrderDao getOrderDao();
+
+    public abstract PizzaDao getPizzaDao();
 
     public abstract RestaurantDao getRestaurantDao();
 

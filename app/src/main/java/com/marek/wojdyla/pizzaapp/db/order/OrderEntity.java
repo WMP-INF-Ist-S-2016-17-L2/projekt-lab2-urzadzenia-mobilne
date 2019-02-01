@@ -5,7 +5,9 @@ import com.marek.wojdyla.pizzaapp.db.restaurant.RestaurantEntity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 @Entity(
         tableName = "order",
@@ -14,23 +16,28 @@ import androidx.room.Index;
                 parentColumns = "restaurant__id",
                 childColumns = "order__restaurant_id"
         ),
-        indices = @Index("restaurant_id")
+        indices = @Index("order__restaurant_id")
 )
 public class OrderEntity {
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "order__id")
-    long id;
+    public long id;
     @ColumnInfo(name = "order__restaurant_id")
-    long restaurantId;
+    public long restaurantId;
     @ColumnInfo(name = "order__is_delivery")
-    boolean isDelivery;
+    public boolean isDelivery;
+    @ColumnInfo(name = "order__is_paid")
+    public boolean isPaid;
     @ColumnInfo(name = "order__total")
-    double total;
+    public double total;
 
     public OrderEntity() {
     }
 
-    public OrderEntity(long restaurantId, boolean isDelivery) {
+    @Ignore
+    public OrderEntity(long restaurantId, boolean isDelivery, double total) {
         this.restaurantId = restaurantId;
         this.isDelivery = isDelivery;
+        this.total = total;
     }
 }

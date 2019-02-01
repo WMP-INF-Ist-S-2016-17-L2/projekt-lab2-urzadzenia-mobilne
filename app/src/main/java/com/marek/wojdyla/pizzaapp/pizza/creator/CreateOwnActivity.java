@@ -19,6 +19,7 @@ import com.marek.wojdyla.pizzaapp.db.pizza.PizzaEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithToppingEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.ToppingEntity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,12 +31,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CreateOwnActivity extends AppCompatActivity {
+    private final DecimalFormat mFormat = new DecimalFormat("0.00");
 
     private Spinner mBaseSpinner;
     private Spinner mToppingSpinner;
     private Adapter mAdapter;
     private TextView mPizzaName;
     private PizzaDao mPizzaBaseDao;
+    private TextView mPizzaPrice;
+
+    private float mPizzaTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +55,9 @@ public class CreateOwnActivity extends AppCompatActivity {
         mBaseSpinner = findViewById(R.id.createOwn_baseType);
         mToppingSpinner = findViewById(R.id.createOwn_topping);
         mPizzaName = findViewById(R.id.createOwn_name);
+        mPizzaPrice = findViewById(R.id.createOwn_price);
 
-        mPizzaBaseDao = PizzaDatabase.getDatabase(this).getPizzaBaseDao();
+        mPizzaBaseDao = PizzaDatabase.getDatabase(this).getPizzaDao();
 
         mPizzaBaseDao.getAllBase().observe(this, this::populateSpinnerBase);
         mPizzaBaseDao.getAllToppings().observe(this, this::populateSpinnerTopping);
@@ -93,7 +99,10 @@ public class CreateOwnActivity extends AppCompatActivity {
     }
 
     private void onAddTopping(View v) {
-        mAdapter.addTopping(((SimpleTopping) mToppingSpinner.getSelectedItem()).entity);
+        ToppingEntity entity = ((SimpleTopping) mToppingSpinner.getSelectedItem()).entity;
+        mAdapter.addTopping(entity);
+        mPizzaTotal += entity.price;
+        mPizzaPrice.setText(mFormat.format(mPizzaTotal));
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -160,7 +169,8 @@ public class CreateOwnActivity extends AppCompatActivity {
         }
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView name;
         TextView price;
 
@@ -172,11 +182,11 @@ public class CreateOwnActivity extends AppCompatActivity {
 
         public void bind(ToppingEntity entity) {
             name.setText(entity.name);
-            price.setText(String.valueOf(entity.price));
+            price.setText(mFormat.format(entity.price));
         }
     }
 
-    private static class Adapter extends RecyclerView.Adapter<ViewHolder> {
+    private class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
         private List<ToppingEntity> mData = new ArrayList<>();
 

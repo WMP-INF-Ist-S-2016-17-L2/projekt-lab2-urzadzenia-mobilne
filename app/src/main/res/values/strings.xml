@@ -14,4 +14,6 @@
     <string name="title_activity_pizza_list">PizzaListActivity</string>
     <string name="pizza_name_hint">Nazwa Pizzy</string>
     <string name="dodaj">Dodaj</string>
+    <string name="paid">Zaplacono</string>
+    <string name="pay_now">Zaplac teraz</string>
 </resources>

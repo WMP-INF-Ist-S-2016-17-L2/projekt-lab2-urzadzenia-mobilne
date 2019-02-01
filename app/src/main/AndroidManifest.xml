@@ -12,6 +12,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".order.OrderInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".restaurant.RestaurantListActivity"
             android:label="@string/title_activity_restaurant_list"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -20,16 +23,12 @@
             android:label="@string/title_activity_create_own"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".PizzaInfo"
+            android:name=".pizza.info.PizzaInfoActivity"
             android:label="@string/title_activity_pizza_info"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".pizza.list.PizzaListActivity"
             android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".UserSpaceActivity"
-            android:label="@string/title_activity_user_space"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"

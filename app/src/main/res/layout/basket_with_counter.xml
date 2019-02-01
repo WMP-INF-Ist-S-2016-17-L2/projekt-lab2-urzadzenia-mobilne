@@ -8,6 +8,7 @@
     tools:background="?attr/colorPrimary">
 
     <ImageButton
+        android:clickable="false"
         android:id="@+id/basketWithCounter_button"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="48dp"

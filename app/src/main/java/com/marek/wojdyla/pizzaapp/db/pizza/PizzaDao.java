@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RoomWarnings;
 
 @Dao
 public interface PizzaDao {
@@ -31,6 +32,7 @@ public interface PizzaDao {
             "INNER JOIN base ON base.base__id = pizza.pizza__base_id " +
             "WHERE pizza.pizza__id = :id"
     )
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     LiveData<PizzaInfo> getPizza(long id);
 
     @Query("SELECT " +

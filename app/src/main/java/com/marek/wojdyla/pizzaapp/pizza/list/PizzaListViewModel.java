@@ -18,7 +18,7 @@ public class PizzaListViewModel extends AndroidViewModel {
 
     public PizzaListViewModel(@NonNull Application application) {
         super(application);
-        PizzaDao pizzaDao = PizzaDatabase.getDatabase(application).getPizzaBaseDao();
+        PizzaDao pizzaDao = PizzaDatabase.getDatabase(application).getPizzaDao();
         mPizzaList = pizzaDao.getPizzaList();
     }
 

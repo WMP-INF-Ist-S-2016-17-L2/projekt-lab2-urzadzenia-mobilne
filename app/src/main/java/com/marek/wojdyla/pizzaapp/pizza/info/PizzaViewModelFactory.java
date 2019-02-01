@@ -1,4 +1,4 @@
-package com.marek.wojdyla.pizzaapp.vm.pizza.info;
+package com.marek.wojdyla.pizzaapp.pizza.info;
 
 import android.app.Application;
 
