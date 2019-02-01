@@ -6,7 +6,6 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -33,6 +32,10 @@ public interface OrderDao {
             "WHERE order__id = :orderId")
     LiveData<Order> getOrder(long orderId);
 
+    @Query("SELECT * FROM `order` " +
+            "LEFT JOIN restaurant ON restaurant.restaurant__id = order__restaurant_id ")
+    LiveData<List<Order>> getOrders();
+
     @Query("UPDATE `order` SET order__is_paid = 1 WHERE order__id = :orderId")
     void payForOrder(long orderId);
 
@@ -41,7 +44,4 @@ public interface OrderDao {
 
     @Insert
     void insert(OrderItemEntity item);
-
-    @Delete
-    void delete(OrderItemEntity item);
 }

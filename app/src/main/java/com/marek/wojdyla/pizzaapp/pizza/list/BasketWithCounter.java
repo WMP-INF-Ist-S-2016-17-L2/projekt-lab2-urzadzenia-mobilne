@@ -48,6 +48,7 @@ public class BasketWithCounter extends FrameLayout {
             mCounter.setAlpha(0f);
             mCounter.animate().alpha(1f).start();
         }
+        mCounter.setText(String.valueOf(counter));
         animate()
                 .scaleY(1.2f)
                 .scaleX(1.2f)
@@ -57,7 +58,7 @@ public class BasketWithCounter extends FrameLayout {
                         animate()
                                 .scaleX(1f)
                                 .scaleY(1f)
-                                .withEndAction(() -> mCounter.setText(String.valueOf(counter)));
+                                .start();
                     }
                 })
                 .start();

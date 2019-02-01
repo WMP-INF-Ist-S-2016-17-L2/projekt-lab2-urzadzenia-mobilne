@@ -1,4 +1,4 @@
-package com.marek.wojdyla.pizzaapp.order;
+package com.marek.wojdyla.pizzaapp.order.info;
 
 import android.content.Context;
 import android.content.Intent;

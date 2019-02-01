@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/listPreferredItemHeight"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
+
+    <ImageView
+        android:id="@+id/orderListItem_image"
+        android:layout_width="?attr/listPreferredItemHeight"
+        android:layout_height="?attr/listPreferredItemHeight"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_baseline_shopping_cart_24px_black" />
+
+    <TextView
+        android:id="@+id/orderListItem_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:padding="8dp"
+        tools:text="2" />
+
+    <TextView
+        android:id="@+id/orderListItem_restaurantName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:padding="8dp"
+        tools:text="Restaurant name" />
+
+    <ImageView
+        android:id="@+id/orderListItem_paymentAwaiting"
+        android:layout_width="?attr/listPreferredItemHeight"
+        android:layout_height="?attr/listPreferredItemHeight"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_baseline_payment_24px" />
+
+    <TextView
+        android:layout_weight="3"
+        android:id="@+id/orderListItem_total"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="45 PLN" />
+</LinearLayout>

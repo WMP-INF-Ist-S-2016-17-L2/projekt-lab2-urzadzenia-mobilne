@@ -12,7 +12,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".order.OrderInfoActivity"
+            android:name=".order.list.OrderListActivity"
+            android:label="Moje zamowienia"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".order.info.OrderInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".restaurant.RestaurantListActivity"

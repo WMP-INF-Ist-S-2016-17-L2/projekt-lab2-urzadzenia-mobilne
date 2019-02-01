@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".order.info.OrderInfoActivity">
+    tools:context=".pizza.list.PizzaListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -20,6 +20,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_order_info" />
+    <include layout="@layout/content_order_list" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

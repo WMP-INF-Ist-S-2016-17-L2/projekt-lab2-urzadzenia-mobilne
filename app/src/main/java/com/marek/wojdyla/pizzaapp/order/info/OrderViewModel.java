@@ -1,4 +1,4 @@
-package com.marek.wojdyla.pizzaapp.order;
+package com.marek.wojdyla.pizzaapp.order.info;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

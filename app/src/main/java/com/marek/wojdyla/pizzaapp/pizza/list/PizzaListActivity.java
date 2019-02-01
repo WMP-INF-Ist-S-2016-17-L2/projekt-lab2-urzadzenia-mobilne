@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.marek.wojdyla.pizzaapp.MainActivity;
 import com.marek.wojdyla.pizzaapp.R;
 import com.marek.wojdyla.pizzaapp.db.PizzaDatabase;
 import com.marek.wojdyla.pizzaapp.db.order.OrderDao;
 import com.marek.wojdyla.pizzaapp.db.order.OrderEntity;
 import com.marek.wojdyla.pizzaapp.db.order.OrderItemEntity;
 import com.marek.wojdyla.pizzaapp.db.pizza.PizzaWithPrice;
-import com.marek.wojdyla.pizzaapp.order.OrderInfoActivity;
+import com.marek.wojdyla.pizzaapp.order.info.OrderInfoActivity;
 import com.marek.wojdyla.pizzaapp.pizza.creator.CreateOwnActivity;
 
 import java.text.DecimalFormat;
@@ -27,6 +28,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.TaskStackBuilder;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -85,11 +87,17 @@ public class PizzaListActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Long orderId) {
                 super.onPostExecute(orderId);
-                startActivity(
-                        OrderInfoActivity
-                                .IntentFactory
-                                .create(PizzaListActivity.this, orderId)
-                );
+                TaskStackBuilder
+                        .create(PizzaListActivity.this)
+                        .addParentStack(MainActivity.class)
+                        .addNextIntent(new Intent(
+                                PizzaListActivity.this,
+                                MainActivity.class))
+                        .addNextIntent(
+                                OrderInfoActivity
+                                        .IntentFactory
+                                        .create(PizzaListActivity.this, orderId)
+                        ).startActivities();
             }
         }.execute();
     }
@@ -187,6 +195,4 @@ public class PizzaListActivity extends AppCompatActivity {
             return mData.size();
         }
     }
-
-
 }
